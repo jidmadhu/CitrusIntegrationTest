@@ -41,6 +41,9 @@ public class CitrusConfig {
     @Value("${yahoo.search.url}")
     private String yahooSearchUrl;
 
+    @Value("${getuser.url}")
+    private String getUser;
+
     @Bean
     public HttpClient navigateToGoogle() {
         return CitrusEndpoints.http()
@@ -60,6 +63,16 @@ public class CitrusConfig {
                 .timeout(2500)
                 .build();
     }
+
+    @Bean
+    public HttpClient getUser() {
+        return CitrusEndpoints.http()
+                .client()
+                .requestMethod(HttpMethod.GET)
+                .requestUrl(getUser)
+                .build();
+    }
+
 
     @Bean
     public RestTemplate restTemplate() {
